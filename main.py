@@ -16,6 +16,7 @@ class FileSizeApp:
 
         self.file_label = self.create_label('')
         self.file_size_label = self.create_label('')
+        self.file_size_label_bits = self.create_label('')
     
     def create_label(self, text: str):
         self.label = tk.Label(self.master, text=text, anchor='w')
@@ -28,12 +29,14 @@ class FileSizeApp:
     def upload_file(self):
         filename = filedialog.askopenfilename()
 
-        if filename:  
+        if filename: 
             file_size = self.get_file_size(filename)
+            file_size_bits = self.get_file_size(filename) * 8 
             file_name = os.path.basename(filename)
 
             self.file_label.config(text=f'File: {file_name}', background='lightgreen', fg='white', font=self.font)
             self.file_size_label.config(text=f'Size: {file_size}bytes', background='lightgreen', fg='white', font=self.font)
+            self.file_size_label_bits.config(text=f'Size in bits: {file_size_bits}bits', background='lightgreen', fg='white', font=self.font)
 
 def main():
     root = tk.Tk()
